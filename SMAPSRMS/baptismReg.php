@@ -15,10 +15,10 @@ session_start();
     <div class="form-container">
         <header>
             <h2>BAPTISMAL REGISTRATION FORM</h2>
-            <button class="close-btn">&times;</button>
+            <button class="close-btn" onclick="window.close();">&times;</button>
         </header>
 
-        <form action="process_registration.php" method="POST">
+        <form action="confirmation.php" method="POST">
             <div class="church-info">
                 <label>Church:</label>
                 <input type="text" value="SAINT MICHAEL THE ARCHANGEL PARISH" readonly>

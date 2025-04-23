@@ -4,7 +4,29 @@ if (isset($_SESSION['username'])) {
     header("Location: homepage.php"); // Redirect if already logged in
     exit();
 }
+
+// Define valid credentials
+$valid_username = "admin";
+$valid_password = "smapsrms2025"; // Update this if necessary
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = trim($_POST['username']); // Trim whitespace
+    $password = trim($_POST['password']); // Trim whitespace
+
+    // Debugging output
+    error_log("Submitted Username: $username, Submitted Password: $password"); // Log the submitted values
+
+    if ($username === $valid_username && $password === $valid_password) {
+        $_SESSION['username'] = $username;
+        header("Location: homepage.php"); // Redirect to homepage after login
+        exit();
+    } else {
+        $error = "Invalid username or password.";
+    }
+}
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +57,7 @@ if (isset($_SESSION['username'])) {
                     <i class="fas fa-user-circle icon"></i>
                 </div>
 
-                <form action="login.php" method="POST">
+                <form method="POST" ="action="login.php">
                     <div class="input-group">
                         <input type="text" id="username" name="username" placeholder="Username:" required>
                     </div>

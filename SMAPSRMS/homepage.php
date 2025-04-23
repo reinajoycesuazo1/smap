@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'db_config.php'; // Include database configuration
 
 ?>
 <!DOCTYPE html>
@@ -8,6 +9,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="homepage.css">
 </head>
@@ -35,15 +37,15 @@ session_start();
         <nav>
     <ul>
         <li>
-            <form action="homepage.php" method="get">
+            <form action="dashboard.php" method="get">
                 <button type="submit" style="background: none; border: none; text-align: center;">
-                    <img src="img/home.png" alt="Home Icon" style="width: 25px; height: 30px; display: block; margin: 0 auto;">
-                    Home
+                    <img src="img/dashboard.png" alt="Dashboard Icon" style="width: 25px; height: 30px; display: block; margin: 0 auto;">
+                    Dashboard
                 </button>
             </form>
         </li>
         <li>
-            <form action="index.php" method="get">
+<form action="registration_options.php" method="get">
                 <button type="submit" style="background: none; border: none; text-align: center;">
                     <img src="img/registration.png" alt="Registration Icon" style="width: 30px; height: 30px; display: block; margin: 0 auto;">
                     Registration
@@ -67,7 +69,7 @@ session_start();
             </form>
         </li>
         <li>
-            <form action="confirmation.php" method="get">
+            <form action="confirmation_records.php" method="get">
                 <button type="submit" style="background: none; border: none; text-align: center;">
                     <img src="img/confirmation.png" alt="Confirmation Icon" style="width: 35px; height: 30px; display: block; margin: 0 auto;">
                     Confirmation
@@ -75,7 +77,7 @@ session_start();
             </form>
         </li>
         <li>
-            <form action="marriage.php" method="get">
+            <form action="marriage_records.php" method="get">
                 <button type="submit" style="background: none; border: none; text-align: center;">
                     <img src="img/marriage.png" alt="Marriage Icon" style="width: 35px; height: 30px; display: block; margin: 0 auto;">
                     Marriage
@@ -84,19 +86,45 @@ session_start();
         </li>
     </ul>
 </nav>
-
-        <div class="profile-container">
-            <img src="img/profile.png" alt="Profile Icon" class="profile-icon">
-            <span class="user-name">USER'S NAME</span>
-        </div>
+<div class="profile-container">
+    <img src="img/profile.png" alt="Profile Icon" class="profile-icon w-8 h-8 rounded-full object-cover">
+    <span id="user-menu-button" onclick="toggleMenu()" class="user-name text-sm font-semibold text-[#1a2a4e] select-none flex items-center space-x-2 cursor-pointer">
+    USER'S NAME <i class="fas fa-caret-down mr-3 text-lg"></i>
+    </span>
+</div>
+    <div id="dropdown-menu" class="hidden origin-top-right absolute right-20 top-16 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10" tabindex="-1" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button">
+        <ul>
+            <li><a href="profile.php" class="flex items-center px-4 py-2 text-sm text-gray-900 hover:bg-gray-100" role="menuitem">Profile</a></li>
+            <li><a hcref="change_password.php" class="flex items-center px-4 py-2 text-sm text-gray-900 hover:bg-gray-100" role="menuitem">Change Password</a></li>
+            <li><a href="logout.php" class="flex items-center px-4 py-2 text-sm text-gray-900 hover:bg-gray-100" role="menuitem">Sign Out</a></li>
+        </ul>
+    </div>
     </div>
 
     <main>
-        <div class="background-image"></div>
+<div class="background-image"></div>
     </main>
-    
     <footer>
         <p>Copyright &copy; SMAP 2025. smap.com. All Rights Reserved | <a href="#">Privacy Policy</a></p>
     </footer>
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("dropdown-menu");
+  menu.classList.toggle("hidden");
+}
+
+// Close dropdown if clicked outside
+window.addEventListener("click", (e) => {
+  const button = document.getElementById("user-menu-button");
+  const menu = document.getElementById("dropdown-menu");
+  if (
+    !button.contains(e.target) &&
+    !menu.contains(e.target) &&
+    !menu.classList.contains("hidden")
+  ) {
+    menu.classList.add("hidden");
+  }
+});
+</script>
 </body>
 </html>
